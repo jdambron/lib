@@ -83,6 +83,7 @@ const main = async (): Promise<void> => {
   }
   if (!buyAsset) {
     console.error(`No asset ${buySymbol} found in asset service`)
+    return
   }
 
   // Swapper Deps
@@ -107,7 +108,13 @@ const main = async (): Promise<void> => {
   const sellAmountBase = toBaseUnit(sellAmount, sellAsset.precision)
 
   const quote = await swapper.buildQuoteTx({
-    input: { sellAsset, buyAsset, sellAmount: sellAmountBase },
+    input: {
+      sellAsset,
+      buyAsset,
+      sellAmount: sellAmountBase,
+      sellAssetAccountId: '0',
+      buyAssetAccountId: '0'
+    },
     wallet
   })
 
