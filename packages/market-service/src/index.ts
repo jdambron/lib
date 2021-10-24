@@ -8,13 +8,15 @@ import {
   PriceHistoryArgs,
   PriceHistoryType
 } from '@shapeshiftoss/types'
+import { GetByMarketCapArgs } from '@shapeshiftoss/types/src'
 
 export const getDefaultMarketService = (): MarketService => {
   return new CoinGeckoMarketService()
 }
 
-export const getByMarketCap: GetByMarketCapType = async () =>
-  getDefaultMarketService().getByMarketCap()
+export const getByMarketCap: GetByMarketCapType = async (args?: GetByMarketCapArgs) => {
+  return getDefaultMarketService().getByMarketCap(args)
+}
 
 export const getMarketData: MarketDataType = async ({ chain, tokenId }: MarketDataArgs) => {
   return getDefaultMarketService().getMarketData({ chain, tokenId })
